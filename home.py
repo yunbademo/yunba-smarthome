@@ -37,11 +37,11 @@ def turn_off_porch_light():
 
 def open_front_door():
     print('open_front_door')
-    stepper_motor.forward(90)
+    stepper_motor.forward(100)
 
 def close_front_door():
     print('close_front_door')
-    stepper_motor.backward(90)
+    stepper_motor.backward(100)
 
 def message_callback(msg):
     print('message_callback:')
@@ -93,7 +93,7 @@ def main():
     messenger = Messenger(message_callback)
     
     while True: 
-        report_ht(messenger)
+#        report_ht(messenger)
         time.sleep(2)
 
 if __name__ == '__main__':

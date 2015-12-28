@@ -93,7 +93,7 @@ def main():
     messenger = Messenger(message_callback)
     
     while True: 
-        report_ht()
+        report_ht(messenger)
         time.sleep(2)
 
 if __name__ == '__main__':

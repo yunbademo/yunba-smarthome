@@ -21,7 +21,7 @@ FREQ = 100 # frequency in Hz
 FIRE_FREQ = 30 #  flickering effect
 
 living = GPIO.PWM(PIN_LIVING, FREQ)
-living.start(0)
+living.start(1)
 
 porch = GPIO.PWM(PIN_PORCH, FREQ)
 porch.start(0)
@@ -29,6 +29,7 @@ porch.start(0)
 fire = GPIO.PWM(PIN_FIREPLACE, FIRE_FREQ)
 fire.start(0)
 
+living.ChangeDutyCycle(100)
 
 def on_socket_connect_ack(args):
     print 'on_socket_connect_ack', args
@@ -71,6 +72,7 @@ def on_suback(args):
 
 def on_message(args):
     print 'on_message', args
+    living.ChangeDutyCycle(0)
 
 def on_set_alias(args):
     print 'on_set_alias', args

@@ -1,6 +1,8 @@
 from socketIO_client import SocketIO
 import logging
 import time
+import os
+import sys
 import thread
 import Adafruit_DHT as dht
 
@@ -9,11 +11,14 @@ logging.basicConfig(level=logging.INFO)
 def timer(no, interval):  
     while True:
         h,t = dht.read_retry(dht.DHT22, 4)
-        temp={0:0.1f}.format(t)
-        hum={1:0.1f}.format(h)
-        message = {'temperature': temp, 'humidity': hum}
-        print 'Temp={0:0.1f}*C Humidity={1:0.1f}%'.format(t, h)
-    	socketIO.emit('publish', {'topic': 'testtopic2', 'msg': message, 'qos': 1})
+        temp='%0.1f' % (t)
+        hum='%1.1f' % (h)
+        message = '{temperature: %s, humidity: %s}' % (temp, hum)
+        print 'Temp=%s hum=%s' % (h,t)
+#        print '%s' % message
+#        print 'Temp=%0.1f*C Humidity=%1.1f%' % (t, h)
+	payload = {'topic': 'testtopic2', 'msg': {'temperature': temp, 'humid': hum}}
+    	socketIO.emit('publish', {'topic':'testtopic2', 'msg':message})
         time.sleep(interval)
 
     thread.exit_thread()
@@ -38,7 +43,7 @@ def on_puback(args):
 def on_suback(args):
     print 'on_suback', args
 #    socketIO.emit('publish', {'topic': 'testtopic2', 'msg': 'from python', 'qos': 1})
-    thread.start_new_thread(timer, (1,10))
+    thread.start_new_thread(timer, (1,5))
 
 #    socketIO.emit('publish', {
 #        'topic': 'testtopic2',

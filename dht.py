@@ -9,6 +9,8 @@ h = 0.0
 t = 0.0
 
 def get_ht_thread():
+    global h
+    global t
     while True:
         ht = dht.read_retry(dht.DHT22, config.DHT22_GPIO_NUM)
         h = '{0:0.1f}'.format(ht[0])

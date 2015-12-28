@@ -89,17 +89,11 @@ def report_ht(messenger):
     msg = json.dumps(m)
     messenger.publish(msg, 1)
         
-def report_ht_timer(messenger):
-    while True:
-        report_ht()
-        time.sleep(2)
-
 def main():
     messenger = Messenger(message_callback)
     
-    thread.start_new_thread(report_ht_timer, (messenger,))
-
     while True: 
+        report_ht()
         time.sleep(2)
 
 if __name__ == '__main__':

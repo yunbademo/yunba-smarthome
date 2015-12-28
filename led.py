@@ -19,12 +19,14 @@ def simple_turn_off(gpio_num):
 
 def turn_on(gpio_num, freq, dc):
     global g_led_pwm
+#    print('turn_on: %d, %d, %d' % (gpio_num, freq, dc))
     GPIO.setup(gpio_num, GPIO.OUT)
     g_led_pwm[gpio_num] = GPIO.PWM(gpio_num, freq)
     g_led_pwm[gpio_num].start(dc)
 
 def turn_off(gpio_num):
     global g_led_pwm
+#    print('turn_off: %d' % (gpio_num))
     if g_led_pwm.has_key(gpio_num):
         g_led_pwm[gpio_num].stop()
 
@@ -39,7 +41,7 @@ def set_duty_cycle(gpio_num, dc):
         g_led_pwm[gpio_num].ChangeDutyCycle(dc)
 
 if __name__ == '__main__':
-    gpio_num = 4
+    gpio_num = 2
     freq = 30
     sleep_time = 2
     dc = 50

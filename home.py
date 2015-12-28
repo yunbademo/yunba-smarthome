@@ -5,6 +5,7 @@ import sys
 import json
 import types
 import thread
+import RPi.GPIO as GPIO
 from messenger import Messenger
 import config
 import led
@@ -90,12 +91,19 @@ def report_ht(messenger):
     messenger.publish(msg, 1)
         
 def main():
+    led.turn_on(config.LED_LIVING, 1, 100)
+    led.turn_on(config.LED_BEDROOM, 1, 100)
+    led.turn_on(config.LED_PORCH, 1, 100)
+
     messenger = Messenger(message_callback)
     
     while True: 
-#        report_ht(messenger)
+        report_ht(messenger)
         time.sleep(2)
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        GPIO.cleanup()
 

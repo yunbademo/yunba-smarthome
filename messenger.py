@@ -23,7 +23,8 @@ class Messenger:
 
     def on_connack(self, args):
         print 'on_connack: ', args
-        self.socketIO.emit('subscribe', {'topic': config.TOPIC})
+#        self.socketIO.emit('subscribe', {'topic': config.TOPIC})
+        self.socketIO.emit('set_alias', {'alias': config.ALIAS})
 
     def on_puback(self, args):
         print 'on_puback: ', args
@@ -81,6 +82,7 @@ class Messenger:
 
     def publish(self, msg, qos):
         if self.can_pub == True:
+            print 'publish: ', msg
             self.socketIO.emit('publish', {'topic': config.TOPIC, 'msg': msg, 'qos': qos})
 
 if __name__ == '__main__':

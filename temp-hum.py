@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 
 def timer(no, interval):  
     while True:
-        h,t = dht.read_retry(dht.DHT22, 4)
+        h,t = dht.read_retry(dht.DHT22, 22)
         temp='%0.1f' % (t)
         hum='%1.1f' % (h)
         message = '{temperature: %s, humidity: %s}' % (temp, hum)

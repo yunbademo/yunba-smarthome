@@ -1,5 +1,5 @@
 APPKEY="563c4afef085fc471efdf803"
-ALIAS="pi_house_shdxiang"
+ALIAS="pi_house_led"
 SECKEY="sec-zxhrt0bbwTHkRBsj8b66VL1dbQ52IFKdkfnZzdI6Qli0zPIx"
 
 data="{\"method\":\"publish_to_alias\", \"appkey\":\"${APPKEY}\", \"seckey\":\"${SECKEY}\", \"alias\":\"${ALIAS}\", \"msg\":\"${1}\"}"

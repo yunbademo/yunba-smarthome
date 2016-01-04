@@ -2,6 +2,7 @@
 
 import time
 import thread
+import string
 import Adafruit_DHT as dht
 import config
 import gpio_lock
@@ -18,6 +19,8 @@ def get_ht_thread():
         gpio_lock.release()
         h = '{0:0.1f}'.format(ht[0])
         t = '{0:0.1f}'.format(ht[1])
+        h = string.atof(h)
+        t = string.atof(t)
         time.sleep(2)
 
 def get_ht():

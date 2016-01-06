@@ -6,8 +6,8 @@ import Queue
 import threading
 import RPi.GPIO as GPIO
 import config
+import led 
 import gpio_lock
-
 
 steps_queue = Queue.Queue()
 
@@ -59,11 +59,22 @@ def do_steps():
         step_fun = backward_one_step
         n = -steps
 
+    freq = led.get_frequency(config.LED_PORCH)
+    dc = led.get_duty_cycle(config.LED_PORCH)
+    status = led.get_status(config.LED_PORCH)
+
+    led.turn_on(config.LED_PORCH, 2, 50)
+
     gpio_lock.acquire()
     for i in range(0, n):
         step_fun(0.01)
     set_motor_input(0, 0, 0, 0)
     gpio_lock.release()
+
+    if status == 'on':
+        led.turn_on(config.LED_PORCH, freq, dc)
+    else:
+        led.turn_off(config.LED_PORCH)
 
 def demon_thread():
     while True:

@@ -3,6 +3,7 @@
 APPKEY = '563c4afef085fc471efdf803'
 TOPIC = 'smart_home_topic'
 ALIAS = 'pi_house'
+CUSTOMID = 'pi_house'
 
 STEP_MOTOR_IN1 = 26
 STEP_MOTOR_IN2 = 19

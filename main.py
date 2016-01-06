@@ -5,6 +5,7 @@ import sys
 import json
 import types
 import thread
+import signal
 import RPi.GPIO as GPIO
 from messenger import Messenger
 import config
@@ -38,11 +39,11 @@ def turn_off_porch_light():
 
 def open_front_door():
     print('open_front_door')
-    stepper_motor.forward(100)
+    stepper_motor.forward(256)
 
 def close_front_door():
     print('close_front_door')
-    stepper_motor.backward(100)
+    stepper_motor.backward(256)
 
 def message_callback(msg):
     print('message_callback:')
@@ -89,8 +90,16 @@ def report_ht(messenger):
 
     msg = json.dumps(m)
     messenger.publish(msg, 1)
-        
+
+def sig_handler(sig, frame):
+    print 'receive a signal:', sig
+    sys.exit()
+
+
 def main():
+    signal.signal(signal.SIGTERM, sig_handler)
+    #signal.signal(signal.SIGINT, sig_handler)
+
     led.turn_on(config.LED_LIVING, 1, 100)
     led.turn_on(config.LED_BEDROOM, 1, 100)
     led.turn_on(config.LED_PORCH, 1, 100)
@@ -106,4 +115,6 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         GPIO.cleanup()
-
+    except Exception as e:
+        GPIO.cleanup()
+        print(e)

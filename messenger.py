@@ -19,7 +19,8 @@ class Messenger:
 
     def on_socket_connect_ack(self, args):
         print 'on_socket_connect_ack: ', args
-        self.socketIO.emit('connect', {'appkey': config.APPKEY})
+        self.socketIO.emit('connect', {'appkey': config.APPKEY, 'customid': config.CUSTOMID})
+#        self.socketIO.emit('connect', {'appkey': config.APPKEY})
 
     def on_connack(self, args):
         print 'on_connack: ', args

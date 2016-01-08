@@ -13,6 +13,17 @@ import led
 import dht
 import stepper_motor
 import magnet_sw
+import socket
+
+REMOTE_SERVER = "www.baidu.com"
+def is_network_ok():
+  try:
+    host = socket.gethostbyname(REMOTE_SERVER)
+    s = socket.create_connection((host, 80), 2)
+    return True
+  except:
+     pass
+  return False
 
 def turn_on_living_light(freq, dc):
     print('turn_on_living_light: %d, %d' % (freq, dc))
@@ -102,9 +113,15 @@ def main():
     signal.signal(signal.SIGTERM, sig_handler)
     #signal.signal(signal.SIGINT, sig_handler)
 
-    led.turn_on(config.LED_LIVING, 1, 100)
+    led.turn_on(config.LED_LIVING, 1, 50)
     led.turn_on(config.LED_BEDROOM, 1, 100)
     led.turn_on(config.LED_PORCH, 1, 100)
+
+    while True:
+        if is_network_ok():
+            break
+        time.sleep(2)
+    led.turn_on(config.LED_LIVING, 1, 100)
 
     messenger = Messenger(message_callback)
     

@@ -12,6 +12,7 @@ import config
 import led
 import dht
 import stepper_motor
+import magnet_sw
 
 def turn_on_living_light(freq, dc):
     print('turn_on_living_light: %d, %d' % (freq, dc))
@@ -81,12 +82,13 @@ def message_callback(msg):
     elif m['act'] == 'close_front_door':
         close_front_door()
 
-def report_ht(messenger):
+def report_st(messenger):
     ht = dht.get_ht()
     m = {}
     m['act'] = 'report_ht'
     m['h'] = ht[0]
     m['t'] = ht[1]
+    m['fd'] = magnet_sw.get_sw_status()
 
     msg = json.dumps(m)
     messenger.publish(msg, 1)
@@ -107,7 +109,7 @@ def main():
     messenger = Messenger(message_callback)
     
     while True: 
-        report_ht(messenger)
+        report_st(messenger)
         time.sleep(2)
 
 if __name__ == '__main__':

@@ -17,3 +17,5 @@ cd ..
 
 sudo pip install -U socketIO-client==0.5.5
 
+sudo apt-get install mplayer
+

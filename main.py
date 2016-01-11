@@ -15,8 +15,10 @@ import led
 import dht
 import stepper_motor
 import magnet_sw
+from player import Player
 
 logging.basicConfig()
+player = Player()
 
 def turn_on_living_light(freq, dc):
     print('turn_on_living_light: %d, %d' % (freq, dc))
@@ -49,6 +51,22 @@ def open_front_door():
 def close_front_door():
     print('close_front_door')
     stepper_motor.backward(256)
+
+def media_play(path):
+    print('media_play')
+    player.play(path)
+
+def media_stop():
+    print('media_stop')
+    player.stop()
+
+def media_pause():
+    print('media_pause')
+    player.pause()
+
+def media_resume():
+    print('media_resume')
+    player.resume()
 
 def message_callback(msg):
 #    print('message_callback:')
@@ -85,6 +103,14 @@ def message_callback(msg):
         open_front_door()
     elif m['act'] == 'close_front_door':
         close_front_door()
+    elif m['act'] == 'media_play':
+        media_play(m['path'])
+    elif m['act'] == 'media_stop':
+        media_stop()
+    elif m['act'] == 'media_pause':
+        media_pause()
+    elif m['act'] == 'media_resume':
+        media_resume()
 
 def report_ht(messenger):
     ht = dht.get_ht()

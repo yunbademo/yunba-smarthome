@@ -20,36 +20,30 @@ from player import Player
 logging.basicConfig()
 player = Player()
 
-def turn_on_living_light(freq, dc):
-    print('turn_on_living_light: %d, %d' % (freq, dc))
-    led.turn_on(config.LED_LIVING, freq, dc)
+def light_on(name, freq, dc):
+    print('light_on: %s, %d, %d' % (name ,freq, dc))
+    if name == 'living':
+        led.turn_on(config.LED_LIVING, freq, dc)
+    elif name == 'bedroom':
+        led.turn_on(config.LED_BEDROOM, freq, dc)
+    elif name == 'porch':
+        led.turn_on(config.LED_PORCH, freq, dc)
 
-def turn_off_living_light():
-    print('turn_off_living_light')
-    led.turn_off(config.LED_LIVING)
+def light_off(name):
+    print('light_off: %s', name)
+    if name == 'living':
+        led.turn_off(config.LED_LIVING)
+    elif name == 'bedroom':
+        led.turn_off(config.LED_BEDROOM)
+    elif name == 'porch':
+        led.turn_off(config.LED_PORCH)
 
-def turn_on_bedroom_light(freq, dc):
-    print('turn_on_bedroom_light: %d, %d' % (freq, dc))
-    led.turn_on(config.LED_BEDROOM, freq, dc)
-
-def turn_off_bedroom_light():
-    print('turn_off_bedroom_light')
-    led.turn_off(config.LED_BEDROOM)
-
-def turn_on_porch_light(freq, dc):
-    print('turn_on_porch_light: %d, %d' % (freq, dc))
-    led.turn_on(config.LED_PORCH, freq, dc)
-
-def turn_off_porch_light():
-    print('turn_off_porch_light')
-    led.turn_off(config.LED_PORCH)
-
-def open_front_door():
-    print('open_front_door')
+def door_open():
+    print('door_open')
     stepper_motor.forward(256)
 
-def close_front_door():
-    print('close_front_door')
+def door_close():
+    print('door_close')
     stepper_motor.backward(256)
 
 def media_play(path):
@@ -87,22 +81,14 @@ def message_callback(msg):
         return
 
     print('act: %s' % m['act'])
-    if m['act'] == 'turn_on_living_light':
-        turn_on_living_light(m['freq'], m['dc'])
-    elif m['act'] == 'turn_off_living_light':
-        turn_off_living_light()
-    elif m['act'] == 'turn_on_bedroom_light':
-        turn_on_bedroom_light(m['freq'], m['dc'])
-    elif m['act'] == 'turn_off_bedroom_light':
-        turn_off_bedroom_light()
-    elif m['act'] == 'turn_on_porch_light':
-        turn_on_porch_light(m['freq'], m['dc'])
-    elif m['act'] == 'turn_off_porch_light':
-        turn_off_porch_light()
-    elif m['act'] == 'open_front_door':
-        open_front_door()
-    elif m['act'] == 'close_front_door':
-        close_front_door()
+    if m['act'] == 'light_on':
+        light_on(m['name'], m['freq'], m['dc'])
+    elif m['act'] == 'light_off':
+        light_off(m['name'])
+    elif m['act'] == 'door_open':
+        door_open()
+    elif m['act'] == 'door_close':
+        door_close()
     elif m['act'] == 'media_play':
         media_play(m['path'])
     elif m['act'] == 'media_stop':

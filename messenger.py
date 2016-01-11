@@ -5,11 +5,13 @@ import sys
 import thread
 from socketIO_client import SocketIO
 import config
+import led
 
 class Messenger:
 
     def __init__(self, message_callback):
         self.can_pub = False
+        self.first_connect = True
         print('messenger init')
         self.message_callback = message_callback
         thread.start_new_thread(self.timer, ())
@@ -19,6 +21,10 @@ class Messenger:
 
     def on_socket_connect_ack(self, args):
         print 'on_socket_connect_ack: ', args
+        if self.first_connect == True:
+            led.turn_on(config.LED_LIVING, 1, 100) #socktio connected 
+            self.first_connect = False
+
         self.socketIO.emit('connect', {'appkey': config.APPKEY, 'customid': config.CUSTOMID})
 #        self.socketIO.emit('connect', {'appkey': config.APPKEY})
 
@@ -26,16 +32,18 @@ class Messenger:
         print 'on_connack: ', args
 #        self.socketIO.emit('subscribe', {'topic': config.TOPIC})
         self.socketIO.emit('set_alias', {'alias': config.ALIAS})
+        self.can_pub = True
 
     def on_puback(self, args):
-        print 'on_puback: ', args
+        #print 'on_puback: ', args
+        pass
 
     def on_suback(self, args):
         print 'on_suback: ', args
         self.socketIO.emit('set_alias', {'alias': config.ALIAS})
 
     def on_message(self, args):
-        print 'on_message: ', args
+        #print 'on_message: ', args
         if self.message_callback != None:
             self.message_callback(args)
 
@@ -78,7 +86,6 @@ class Messenger:
         self.socketIO.on('recvack', self.on_publish2_recvack)
         self.socketIO.on('get_state_ack', self.on_get_state_ack)
         self.socketIO.on('alias', self.on_alias)
-        self.can_pub = True
         self.socketIO.wait()
 
     def publish(self, msg, qos):

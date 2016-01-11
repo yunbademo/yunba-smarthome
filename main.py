@@ -4,8 +4,10 @@ import time
 import sys
 import json
 import types
-import thread
+import threading
 import signal
+import socket
+import logging
 import RPi.GPIO as GPIO
 from messenger import Messenger
 import config
@@ -13,17 +15,8 @@ import led
 import dht
 import stepper_motor
 import magnet_sw
-import socket
 
-REMOTE_SERVER = "www.baidu.com"
-def is_network_ok():
-  try:
-    host = socket.gethostbyname(REMOTE_SERVER)
-    s = socket.create_connection((host, 80), 2)
-    return True
-  except:
-     pass
-  return False
+logging.basicConfig()
 
 def turn_on_living_light(freq, dc):
     print('turn_on_living_light: %d, %d' % (freq, dc))
@@ -58,8 +51,8 @@ def close_front_door():
     stepper_motor.backward(256)
 
 def message_callback(msg):
-    print('message_callback:')
-    print(msg)
+#    print('message_callback:')
+#    print(msg)
 
     if not isinstance(msg, dict):
         return
@@ -67,7 +60,7 @@ def message_callback(msg):
     if msg['topic'] != config.ALIAS:
         return
 
-    print('get a message!')
+    print('get a message:')
     try:
         m = json.loads(msg['msg'])
     except Exception as e:
@@ -93,13 +86,30 @@ def message_callback(msg):
     elif m['act'] == 'close_front_door':
         close_front_door()
 
-def report_st(messenger):
+def report_ht(messenger):
     ht = dht.get_ht()
     m = {}
     m['act'] = 'report_ht'
     m['h'] = ht[0]
     m['t'] = ht[1]
-    m['fd'] = magnet_sw.get_sw_status()
+
+    msg = json.dumps(m)
+    messenger.publish(msg, 1)
+
+def report_door(messenger):
+    m = {}
+    m['act'] = 'report_door'
+    m['st'] = magnet_sw.get_sw_status()
+
+    msg = json.dumps(m)
+    messenger.publish(msg, 1)
+
+def report_light(messenger):
+    m = {}
+    m['act'] = 'report_light'
+    m['living'] = led.get_status(config.LED_LIVING)
+    m['bedroom'] = led.get_status(config.LED_BEDROOM)
+    m['porch'] = led.get_status(config.LED_PORCH)
 
     msg = json.dumps(m)
     messenger.publish(msg, 1)
@@ -108,12 +118,20 @@ def sig_handler(sig, frame):
     print 'receive a signal:', sig
     sys.exit()
 
+def is_network_ok():
+  try:
+    host = socket.gethostbyname('www.baidu.com')
+    s = socket.create_connection((host, 80), 2)
+    return True
+  except:
+     pass
+  return False
 
 def main():
     signal.signal(signal.SIGTERM, sig_handler)
     #signal.signal(signal.SIGINT, sig_handler)
 
-    led.turn_on(config.LED_LIVING, 1, 50)
+    led.turn_on(config.LED_LIVING, 1, 50) #checking network
     led.turn_on(config.LED_BEDROOM, 1, 100)
     led.turn_on(config.LED_PORCH, 1, 100)
 
@@ -121,12 +139,16 @@ def main():
         if is_network_ok():
             break
         time.sleep(2)
-    led.turn_on(config.LED_LIVING, 1, 100)
+    led.turn_on(config.LED_LIVING, 4, 50) #network is ok, connecting socktio
 
     messenger = Messenger(message_callback)
-    
+
     while True: 
-        report_st(messenger)
+        report_ht(messenger)
+        time.sleep(0.5)
+        report_door(messenger)
+        time.sleep(0.5)
+        report_light(messenger)
         time.sleep(2)
 
 if __name__ == '__main__':

@@ -98,27 +98,27 @@ def message_callback(msg):
     elif m['act'] == 'media_resume':
         media_resume()
 
-def report_ht(messenger):
+def humtem_report(messenger):
     ht = dht.get_ht()
     m = {}
-    m['act'] = 'report_ht'
+    m['act'] = 'humtem'
     m['h'] = ht[0]
     m['t'] = ht[1]
 
     msg = json.dumps(m)
     messenger.publish(msg, 1)
 
-def report_door(messenger):
+def door_report(messenger):
     m = {}
-    m['act'] = 'report_door'
+    m['act'] = 'door'
     m['st'] = magnet_sw.get_sw_status()
 
     msg = json.dumps(m)
     messenger.publish(msg, 1)
 
-def report_light(messenger):
+def light_report(messenger):
     m = {}
-    m['act'] = 'report_light'
+    m['act'] = 'light'
     m['living'] = led.get_status(config.LED_LIVING)
     m['bedroom'] = led.get_status(config.LED_BEDROOM)
     m['porch'] = led.get_status(config.LED_PORCH)
@@ -156,11 +156,11 @@ def main():
     messenger = Messenger(message_callback)
 
     while True: 
-        report_ht(messenger)
+        humtem_report(messenger)
         time.sleep(0.5)
-        report_door(messenger)
+        door_report(messenger)
         time.sleep(0.5)
-        report_light(messenger)
+        light_report(messenger)
         time.sleep(2)
 
 if __name__ == '__main__':

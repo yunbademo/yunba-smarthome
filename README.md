@@ -18,9 +18,14 @@ Each test script has different arguments, if the number of arguments is not corr
 ```bash
 cd test
 chmod a+x *.sh
-./turn_on_living_light.sh 1 60
-./turn_off_living_light.sh
-./open_front_door.sh
-./close_front_door.sh
+
+./door_open.sh 
+./door_close.sh 
+./light_off.sh living
+./light_off.sh porch
+./light_off.sh bedroom
+./light_on.sh porch 1 100
+./light_on.sh living 1 100
+./light_on.sh bedroom 1 100
 ```
 

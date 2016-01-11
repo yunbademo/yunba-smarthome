@@ -29,6 +29,7 @@ Door control:
 	{"act":"door_close"}
 
 Media control:
+
 	{"act":"media_play", "path":"http://www.example.com/test.mp3"}
 	{"act":"media_play", "path":"/home/test.mp3"}
 

@@ -38,3 +38,6 @@ Media control:
 	{"act":"media_pause"}
 
 	{"act":"media_resume"}
+
+	{"act":"media_inc_vol"}
+	{"act":"media_dec_vol"}

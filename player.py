@@ -54,6 +54,18 @@ class Player:
 
         self.status = 'play'
 
+    def inc_vol(self):
+        if self.status != 'play':
+            return
+
+        self.p.stdin.write('0')
+
+    def dec_vol(self):
+        if self.status != 'play':
+            return
+
+        self.p.stdin.write('9')
+
 if __name__ == '__main__':
     player = Player()
     TEST_URL = 'http://sc.111ttt.com/up/mp3/11219/2A78B09675979C6093C58E3E39740FC8.mp3'
@@ -74,6 +86,18 @@ if __name__ == '__main__':
     time.sleep(sleep)
     print('resume')
     player.resume()
+
+    time.sleep(sleep)
+    print('inc_vol')
+    player.inc_vol()
+    print('inc_vol')
+    player.inc_vol()
+
+    time.sleep(sleep)
+    print('dec_vol')
+    player.dec_vol()
+    print('dec_vol')
+    player.dec_vol()
 
     time.sleep(sleep)
     print('stop')

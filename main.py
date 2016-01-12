@@ -62,6 +62,14 @@ def media_resume():
     print('media_resume')
     player.resume()
 
+def media_inc_vol():
+    print('media_inc_vol')
+    player.inc_vol()
+
+def media_dec_vol():
+    print('media_dec_vol')
+    player.dec_vol()
+
 def message_callback(msg):
 #    print('message_callback:')
 #    print(msg)
@@ -97,6 +105,10 @@ def message_callback(msg):
         media_pause()
     elif m['act'] == 'media_resume':
         media_resume()
+    elif m['act'] == 'media_inc_vol':
+        media_inc_vol()
+    elif m['act'] == 'media_dec_vol':
+        media_dec_vol()
 
 def humtem_report(messenger):
     ht = dht.get_ht()

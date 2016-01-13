@@ -43,7 +43,7 @@ class Messenger:
         self.socketIO.emit('set_alias', {'alias': config.ALIAS})
 
     def on_message(self, args):
-        #print 'on_message: ', args
+        print 'on_message: ', args
         if self.message_callback != None:
             self.message_callback(args)
 

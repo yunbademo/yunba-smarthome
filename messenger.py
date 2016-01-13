@@ -32,7 +32,6 @@ class Messenger:
         print 'on_connack: ', args
 #        self.socketIO.emit('subscribe', {'topic': config.TOPIC})
         self.socketIO.emit('set_alias', {'alias': config.ALIAS})
-        self.can_pub = True
 
     def on_puback(self, args):
         #print 'on_puback: ', args
@@ -49,6 +48,7 @@ class Messenger:
 
     def on_set_alias(self, args):
         print 'on_set_alias: ', args
+        self.can_pub = True
 
     def on_get_alias(self, args):
         print 'on_get_alias: ', args

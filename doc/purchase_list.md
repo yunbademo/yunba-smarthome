@@ -1,8 +1,4 @@
----
-
-最好阅读[制作过程](https://github.com/yunbademo/yunba-smarthome/blob/master/doc/how_to_make.md)以便对云巴智能小屋有初步的了解。
-
----
+最好先阅读[制作过程](https://github.com/yunbademo/yunba-smarthome/blob/master/doc/how_to_make.md)以便对云巴智能小屋有初步的了解。
 
 下表列出了制作云巴智能小屋所需要的硬件，由于商家经营调整，表中的**价格**可能与现在的价格不一致。
 
@@ -29,5 +25,3 @@
 | 移动电源 | 用于给小屋供电 | 59.00 | [链接](http://item.jd.com/1300897.html) |
 | 迷你音箱 | 播放音乐 | 29.00 | [链接](http://item.jd.com/1504164.html) |
 | 无线usb网卡 | 树莓派2开发板无线联网 | 38.00 | [链接](http://item.jd.com/1646214269.html) |
-
----

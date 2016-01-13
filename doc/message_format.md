@@ -2,7 +2,7 @@ Light status report:
 
 	{"act": "light", "living": "on", "porch": "off", "bedroom": "on"}
 
-Humidity and temperature:
+Humidity and temperature report:
 
 	{"act": "humtem", "h": 65.6, "t": 23.1}
 
@@ -25,7 +25,6 @@ Light control:
 Door control:
 
 	{"act":"door_open"}
-
 	{"act":"door_close"}
 
 Media control:

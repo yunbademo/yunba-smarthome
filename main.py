@@ -21,7 +21,7 @@ logging.basicConfig()
 player = Player()
 
 def light_on(name, freq, dc):
-    print('light_on: %s, %d, %d' % (name ,freq, dc))
+    print('light_on: %s, %d, %d' % (name, freq, dc))
     if name == 'living':
         led.turn_on(config.LED_LIVING, freq, dc)
     elif name == 'bedroom':
@@ -30,7 +30,7 @@ def light_on(name, freq, dc):
         led.turn_on(config.LED_PORCH, freq, dc)
 
 def light_off(name):
-    print('light_off: %s', name)
+    print('light_off: %s' % name)
     if name == 'living':
         led.turn_off(config.LED_LIVING)
     elif name == 'bedroom':

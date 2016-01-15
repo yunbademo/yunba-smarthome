@@ -34,6 +34,7 @@ def turn_on(gpio_num, freq, dc):
     g_led_pwm[gpio_num]['freq'] = freq
     g_led_pwm[gpio_num]['dc'] = dc
     g_led_pwm[gpio_num]['status'] = 'on'
+    status_notify()
 
 def turn_off(gpio_num):
     global g_led_pwm
@@ -42,18 +43,21 @@ def turn_off(gpio_num):
     if g_led_pwm.has_key(gpio_num):
         g_led_pwm[gpio_num]['obj'].stop()
         g_led_pwm[gpio_num]['status'] = 'off'
+        status_notify()
 
 def set_frequency(gpio_num, freq):
     global g_led_pwm
     if g_led_pwm.has_key(gpio_num):
         g_led_pwm[gpio_num]['freq'] = freq
         g_led_pwm[gpio_num]['obj'].ChangeFrequency(freq)
+        status_notify()
 
 def set_duty_cycle(gpio_num, dc):
     global g_led_pwm
     if g_led_pwm.has_key(gpio_num):
         g_led_pwm[gpio_num]['dc'] = dc
         g_led_pwm[gpio_num]['obj'].ChangeDutyCycle(dc)
+        status_notify()
 
 def get_frequency(gpio_num):
     global g_led_pwm
@@ -76,7 +80,7 @@ def get_status(gpio_num):
     else:
         return 'off'
 
-def notify():
+def status_notify():
     if change_notify != None:
         change_notify('light')
 

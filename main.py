@@ -176,9 +176,9 @@ def change_notify(name):
 
     if name == 'light':
         light_report()
-    elif name == 'door'
+    elif name == 'door':
         door_report()
-    elif name == 'media'
+    elif name == 'media':
         media_report()
     
 def main():

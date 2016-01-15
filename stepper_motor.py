@@ -10,6 +10,7 @@ import led
 import gpio_lock
 
 steps_queue = Queue.Queue()
+change_notify = None
 
 def set_motor_input(i1, i2, i3, i4):
     GPIO.output(config.STEP_MOTOR_IN1, i1)
@@ -75,6 +76,11 @@ def do_steps():
         led.turn_on(config.LED_PORCH, freq, dc)
     else:
         led.turn_off(config.LED_PORCH)
+    status_notify()
+
+def status_notify():
+    if change_notify != None:
+        change_notify('door')
 
 def demon_thread():
     while True:

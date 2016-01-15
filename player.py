@@ -10,10 +10,11 @@ import RPi.GPIO as GPIO
 
 class Player:
 
-    def __init__(self):
+    def __init__(self, change_notify):
         print('player init')
         self.p = None
         self.status = 'stop'
+        self.change_notify = change_notify
 
     def __del__(self):
         print('player del')
@@ -28,6 +29,7 @@ class Player:
 #        self.p = subprocess.Popen(args, stdin=subprocess.PIPE)
         self.p = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=dev_null, stderr=dev_null)
         self.status = 'play'
+        self.status_notify()
 
     def stop(self):
         if self.status == 'stop':
@@ -37,6 +39,7 @@ class Player:
         self.p.stdin.write('q')
 
         self.status = 'stop'
+        self.status_notify()
 
     def pause(self):
         if self.status != 'play':
@@ -45,6 +48,7 @@ class Player:
         self.p.stdin.write('p')
 
         self.status = 'pause'
+        self.status_notify()
 
     def resume(self):
         if self.status != 'pause':
@@ -53,6 +57,7 @@ class Player:
         self.p.stdin.write('p')
 
         self.status = 'play'
+        self.status_notify()
 
     def inc_vol(self):
         if self.status != 'play':
@@ -65,6 +70,10 @@ class Player:
             return
 
         self.p.stdin.write('9')
+
+    def status_notify(self):
+        if self.change_notify != None:
+            self.change_notify('media')
 
 if __name__ == '__main__':
     player = Player()

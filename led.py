@@ -5,6 +5,7 @@ import sys
 import RPi.GPIO as GPIO
 
 g_led_pwm = {}
+change_notify = None
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -74,6 +75,10 @@ def get_status(gpio_num):
         return g_led_pwm[gpio_num]['status']
     else:
         return 'off'
+
+def notify():
+    if change_notify != None:
+        change_notify('light')
 
 if __name__ == '__main__':
     gpio_num = 27

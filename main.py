@@ -167,15 +167,30 @@ def is_network_ok():
     s = socket.create_connection((host, 80), 2)
     return True
   except:
-     pass
+    pass
   return False
 
+def change_notify(name):
+    if messenger == None:
+        return
+
+    if name == 'light':
+        light_report()
+    elif name == 'door'
+        door_report()
+    elif name == 'media'
+        media_report()
+    
 def main():
     global player
     global messenger
 
     signal.signal(signal.SIGTERM, sig_handler)
     #signal.signal(signal.SIGINT, sig_handler)
+
+    led.change_notify = change_notify
+    stepper_motor.change_notify = change_notify
+    led.change_notify = change_notify
 
     led.turn_on(config.LED_LIVING, 1, 50) #checking network
     led.turn_on(config.LED_BEDROOM, 1, 100)
@@ -187,7 +202,7 @@ def main():
         time.sleep(2)
     led.turn_on(config.LED_LIVING, 4, 50) #network is ok, connecting socktio
 
-    player = Player()
+    player = Player(change_notify)
     messenger = Messenger(message_callback)
 
     while True: 

@@ -18,7 +18,9 @@ import magnet_sw
 from player import Player
 
 logging.basicConfig()
-player = Player()
+
+player = None
+messenger = None
 
 def light_on(name, freq, dc):
     print('light_on: %s, %d, %d' % (name, freq, dc))
@@ -70,6 +72,13 @@ def media_dec_vol():
     print('media_dec_vol')
     player.dec_vol()
 
+def report_req():
+    print('report_req')
+    humtem_report()
+    door_report()
+    light_report()
+    media_report()
+
 def message_callback(msg):
 #    print('message_callback:')
 #    print(msg)
@@ -109,8 +118,10 @@ def message_callback(msg):
         media_inc_vol()
     elif m['act'] == 'media_dec_vol':
         media_dec_vol()
+    elif m['act'] == 'report_req':
+        report_req()
 
-def humtem_report(messenger):
+def humtem_report():
     ht = dht.get_ht()
     m = {}
     m['act'] = 'humtem'
@@ -120,7 +131,7 @@ def humtem_report(messenger):
     msg = json.dumps(m)
     messenger.publish(msg, 1)
 
-def door_report(messenger):
+def door_report():
     m = {}
     m['act'] = 'door'
     m['st'] = magnet_sw.get_sw_status()
@@ -128,12 +139,20 @@ def door_report(messenger):
     msg = json.dumps(m)
     messenger.publish(msg, 1)
 
-def light_report(messenger):
+def light_report():
     m = {}
     m['act'] = 'light'
     m['living'] = led.get_status(config.LED_LIVING)
     m['bedroom'] = led.get_status(config.LED_BEDROOM)
     m['porch'] = led.get_status(config.LED_PORCH)
+
+    msg = json.dumps(m)
+    messenger.publish(msg, 1)
+
+def media_report():
+    m = {}
+    m['act'] = 'media'
+    m['st'] = player.status
 
     msg = json.dumps(m)
     messenger.publish(msg, 1)
@@ -152,6 +171,9 @@ def is_network_ok():
   return False
 
 def main():
+    global player
+    global messenger
+
     signal.signal(signal.SIGTERM, sig_handler)
     #signal.signal(signal.SIGINT, sig_handler)
 
@@ -165,14 +187,11 @@ def main():
         time.sleep(2)
     led.turn_on(config.LED_LIVING, 4, 50) #network is ok, connecting socktio
 
+    player = Player()
     messenger = Messenger(message_callback)
 
     while True: 
-        humtem_report(messenger)
-        time.sleep(0.5)
-        door_report(messenger)
-        time.sleep(0.5)
-        light_report(messenger)
+        humtem_report()
         time.sleep(2)
 
 if __name__ == '__main__':

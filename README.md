@@ -81,7 +81,7 @@ SECKEY="sec-zxhrt0bbwTHkRBsj8b66VL1dbQ52IFKdkfnZzdI6Qli0zPIx"
 ./media_stop.sh
 ```
 
-暂停播放与恢复播放：
+暂停与恢复播放：
 ```bash
 ./media_pause.sh
 ./media_resume.sh

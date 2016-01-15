@@ -1,0 +1,45 @@
+.sliderfre{
+	margin-top: 10px;
+	  font-family: 'Indie Flower', cursive;
+	  font-size: 1.3em;
+
+}
+
+.sliderdc{
+	margin-top: 10px;
+	  font-family: 'Indie Flower', cursive;
+ font-size: 1.3em;
+
+}
+
+.player{
+clear: both;
+margin-bottom: 10%;
+padding-top: 5%;
+}
+
+.player p{
+	font-size: 1.3em;
+	font-family: 'Indie Flower', cursive;
+    padding-left: 90px;
+    letter-spacing: 4px;
+   
+    color: rgb(134, 104, 69);
+
+}
+.scene{
+clear: both;
+margin-bottom: 8%;
+
+    padding-left: 16px;
+
+}
+.scene p{
+	font-size: 1.3em;
+	font-family: 'Indie Flower', cursive;
+    padding-left: 77px;
+    letter-spacing: 4px;
+   
+    color: rgb(134, 104, 69);
+
+}

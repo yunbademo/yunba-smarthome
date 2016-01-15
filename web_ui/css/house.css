@@ -1,0 +1,165 @@
+
+h1 {
+  font-family: 'Indie Flower', cursive;
+  text-align: center;
+  letter-spacing: 4px;
+  font-size: 35px;
+  color: #6D6D6D;
+}
+.picture {
+  width: 270px;
+  height: 270px;
+  background: #CFDEE6;
+  border-radius: 50%;
+  margin: 50px auto 0;
+  position: relative;
+  overflow: hidden;
+}
+.tower {
+  width: 36px;
+  height: 96px;
+  background: white;
+  position: absolute;
+  bottom: 84px;
+  left: 66px;
+}
+.tower:before {
+  content: "";
+  width: 0;
+	height: 0;
+	border-left: 18px solid transparent;
+	border-right: 18px solid transparent;
+	border-bottom: 24px solid #D56851;
+  position: absolute;
+  top: -24px;
+}
+.tower:after {
+  content: "";
+  width: 12px;
+  height: 15px;
+  background: #6D6D6D;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.bright:after {
+  content: "";
+  width: 12px;
+  height: 15px;
+  background: #E4FD14;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+.house {
+  width: 126px;
+  height: 36px;
+  background: white;
+  position: absolute;
+  left: 75px;
+  bottom: 84px;
+}
+.house:before {
+  content: "";
+  width: 110px;
+  height: 0;
+  border-bottom: 15px solid #D56851;
+  border-right: 16px solid transparent;
+  position: absolute;
+  top: -15px;
+}
+.house:after {
+  content: "";
+  width: 83px;
+  height: 21px;
+  background: #D56851;
+  position: absolute;
+  top: -36px;
+  left: 27px;
+}  
+ul {
+  margin: 7px 0 0 27px;
+  padding: 0;
+  list-style: none;
+}
+li {
+  display: inline-block;
+  width: 12px;
+  height: 18px;
+  background: #6D6D6D;
+}
+li:nth-child(3) {
+  margin-right: 10px;
+}
+@keyframes clouds {
+  50% {left:270px;opacity:0.5}
+  51% {opacity:0;}
+  100%{opacity:0;left:-110px;}
+}
+.clouds {
+  width: 110px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+  top: 60px;
+  left: -110px; 
+  animation: clouds 20s linear infinite;
+}
+.clouds-two {
+  width: 110px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+  top: 20px;
+  left: -110px; 
+  animation: clouds 20s linear infinite 10s;
+}
+.cloud {
+  background: white;
+  position: absolute;
+}
+.one {
+  width: 30px;
+  height: 15px;
+  border-radius: 60px 60px 0 0;
+  top: 0;
+  left: 0;
+}
+.one:after {
+  content: "";
+  width: 20px;
+  height: 8px;
+  background: white;
+  border-radius: 40px 40px 0 0;
+  position: absolute;
+  left: 20px;
+  top: 7px;
+}
+.two {
+  width: 24px;
+  height: 10px;
+  border-radius: 48px 48px 0 0;
+  top: 30px;
+  left: 30px;
+}
+.three {
+  width: 30px;
+  height: 15px;
+  border-radius: 60px 60px 0 0;
+  top: 25px;
+  left: 80px;
+}
+.three:before {
+  content: "";
+  width: 20px;
+  height: 8px;
+  background: white;
+  border-radius: 40px 40px 0 0;
+  position: absolute;
+  left: -10px;
+  top: 7px;
+}
+
+  
+  

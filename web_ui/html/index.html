@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>Yunba iot home</title>
+
+  <!-- Bootstrap -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/jquery-ui.min.css" rel="stylesheet">
+  <link href="../css/evol.colorpicker.min.css" rel="stylesheet">
+  <link href="../css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/house.css">
+  <link rel="stylesheet" href="../css/button.css">
+  <link rel="stylesheet" href="../css/loading.css">
+  <link rel="stylesheet" href="../css/slider.css"></head>
+<body>
+  <!-- 加载页面 -->
+  <div class="wrapper">
+    <div id="preloader_4">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="container-fluid hide" style="margin-top:30px">
+    <div class="row">
+      <!-- 小屏幕显示 -->
+      <div class="col-xs-12 hidden-md hidden-lg">
+
+        <h1>Yunba - Home</h1>
+      </div>
+      <!-- 按钮组和滑杆 -->
+      <div class="col-xs-12 col-md-4">
+        <div class ="group">
+          <fieldset class="switch">
+            <legend>Subscribe:</legend>
+
+            <input id="yes" name="view" type="radio" class="viinput" >
+            <label for="yes">Yes</label>
+
+            <input id="no" name="view" type="radio" class="viinput" checked>
+            <label for="no">No</label>
+
+            <span class="switch-button"></span>
+          </fieldset>
+        </div>
+
+        <div class ="group">
+          <fieldset class="switch">
+            <legend>Door:</legend>
+
+            <input id="open" name="door" type="radio" class="doorinput" checked>
+            <label for="open">Open</label>
+
+            <input id="close" name="door" type="radio" class="doorinput" checked>
+            <label for="close">Close</label>
+
+            <span class="switch-button"></span>
+          </fieldset>
+        </div>
+
+        <div class="group">
+          <fieldset class="switch">
+            <legend>Living Light:</legend>
+
+            <input id="llon" name="ll" type="radio" class="llinput" >
+            <label for="llon">ON</label>
+
+            <input id="lloff" name="ll" type="radio" class="llinput" checked>
+            <label for="lloff">OFF</label>
+
+            <span class="switch-button"></span>
+          </fieldset>
+        </div>
+
+        <div class="group">
+          <fieldset class="switch">
+            <legend>Bedroom Light</legend>
+
+            <input id="blon" name="bl" type="radio" class="blinput" >
+            <label for="blon">ON</label>
+
+            <input id="bloff" name="bl" type="radio" class="blinput" checked>
+            <label for="bloff">OFF</label>
+
+            <span class="switch-button"></span>
+          </fieldset>
+        </div>
+
+        <div class="group">
+          <fieldset class="switch">
+            <legend>Porch Light</legend>
+
+            <input id="plon" name="pl" type="radio" class="plinput" >
+            <label for="plon">ON</label>
+
+            <input id="ploff" name="pl" type="radio" class="plinput" checked>
+            <label for="ploff">OFF</label>
+
+            <span class="switch-button"></span>
+          </fieldset>
+        </div>
+
+
+
+        <!-- 
+        <button id="unsubscribe">unsubscribe</button>
+      <button id="subscribe">subscribe</button>
+      <button id="off">off</button>
+      <button id="on">on</button>
+      -->
+    </div>
+
+    <!-- 小房子 -->
+
+    <div class="col-xs-12 col-md-4">
+
+      <h1>Yunba - Home</h1>
+      <div class="picture">
+        <div class="clouds">
+          <div class="cloud one"></div>
+          <div class="cloud two"></div>
+          <div class="cloud three"></div>
+        </div>
+        <div class="clouds-two">
+          <div class="cloud one"></div>
+          <div class="cloud two"></div>
+          <div class="cloud three"></div>
+        </div>
+        <div class="tower"></div>
+        <div class="house">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 灯泡控制 -->
+      <div style="margin-top:80px;margin-left:50px">
+        <p style="font-family: 'Indie Flower', cursive;text-align:center;font-size:1.4em;padding-right:50px">Light Controller</p>
+        <article class="mainfeature">
+
+          <div class="sliderset">
+            <div class="slider red">
+              <div class="sliderfre">
+                <span>frequency:</span>
+                <span>60</span>
+              </div>
+            </div>
+
+            <div class="slider blue">
+              <div class="sliderdc">
+                <span>duty circle:</span>
+                <span>100</span>
+              </div>
+            </div>
+
+          </div>
+        </article>          
+        </div>
+    </div>
+   
+
+    <div class="col-xs-12 col-md-4">
+     <!-- 音乐播放器 -->
+      <div class="player">
+        <form class="form-inline">
+          <p>Music Zone</p>
+          <div class="form-group">
+
+            <div class="col-xs-5 col-md-6">
+              <input type="text" class="form-control " id="musicUrl" placeholder="http://www.example.com/test.mp3" list="music">
+              <datalist id="music">
+                <option value="Hotel California.mp3">
+                  <option value="Moves Like Jagger.mp3">
+                    <option value="Someone Like You.mp3">
+                      <option value="Stickwitu.mp3"></datalist>
+                    </div>
+                    <div class="btn-group" role="group" >
+
+                      <button type="button" class="btn btn-default" id="play">
+                        <span class="glyphicon glyphicon-play"></span>
+                      </button>
+                      <button type="button" class="btn btn-default hide" id="stop">
+                        <span class="glyphicon glyphicon-stop"></span>
+                      </button>
+                      <button type="button" class="btn btn-default" id="pause">
+                        <span class="glyphicon glyphicon-pause"></span>
+                      </button>
+                      <button type="button" class="btn btn-default hide" id="resume">
+                        <span class=" glyphicon glyphicon-repeat"></span>
+                      </button>
+                      <button type="button" class="btn btn-default" id="down">
+                        <span class="glyphicon glyphicon-volume-down"></span>
+                      </button>
+                      <button type="button" class="btn btn-default" id="up">
+                        <span class="glyphicon glyphicon-volume-up"></span>
+                      </button>
+
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+  <!-- 情景模式 -->
+      <div class="scene">
+        <form class="form-inline">
+          <p>Scene Mode</p>
+          <div class="form-group">
+
+        
+                    <div class="btn-group" role="group" >
+
+                      <button type="button" class="btn btn-default" id="normal">
+                        <span >日常模式</span>
+                      </button>
+                      <button type="button" class="btn btn-success" id="outgoing">
+                        <span >外出模式</span>
+                      </button>
+                      <button type="button" class="btn btn-info" id="sleep">
+                        <span >睡眠模式</span>
+                      </button>
+                      <button type="button" class="btn btn-warning " id="party">
+                        <span>派对模式</span>
+                      </button>
+                     
+                     
+
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+
+
+              <div class="donation-meter"> <strong>Temperature</strong>
+                <!-- <strong class="goal">摄氏度℃</strong>
+              -->
+              <span class="glass">
+                <strong class="total" style="bottom: 60%">24℃</strong>
+                <span class="amount" style="height: 60%"></span>
+              </span>
+              <div class="bulb">
+                <span class="red-circle"></span>
+                <span class="filler">
+                  <span></span>
+                </span>
+              </div>
+            </div>
+
+
+   <!-- 温度计和湿度计 --> 
+            <div class="donation-meter">
+              <strong style="
+    padding-left: 20px;">Humidity</strong>
+              <!--   <strong class="goal">摄氏度℃</strong>
+            -->
+            <span class="glass">
+              <strong class="total_b" style="bottom: 60%">60%</strong>
+              <span class="amount_b" style="height: 60%"></span>
+            </span>
+            <div class="bulb">
+              <span class="blue-circle"></span>
+              <span class="filler_b">
+                <span></span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 模态框 -->
+
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Message</h4>
+          </div>
+          <div class="modal-body">
+            <p></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <!--  <button type="button" class="btn btn-primary">Save changes</button>
+          -->
+        </div>
+      </div>
+      <!-- /.modal-content --> </div>
+    <!-- /.modal-dialog --> </div>
+  <!-- /.modal -->
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="../js/jquery-2.1.4.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="../js/socket.io-1.3.5.min.js"></script>
+  <script type="text/javascript" src="../js/yunba-js-sdk.js"></script>
+  <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+
+  <script type="text/javascript" src="../js/slider.js"></script>
+
+</body>
+</html>

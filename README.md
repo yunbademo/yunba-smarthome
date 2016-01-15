@@ -55,7 +55,7 @@ SECKEY="sec-zxhrt0bbwTHkRBsj8b66VL1dbQ52IFKdkfnZzdI6Qli0zPIx"
 ./door_close.sh
 ```
 
-控制灯，开灯的三个参数分别为：灯名，频率，占空比(参考[制作过程][2])：
+控制灯，开灯的三个参数分别为：灯名，频率，占空比（参考[制作过程][2]）：
 ```bash
 ./light_on.sh living 60 100
 ./light_on.sh bedroom 60 100
@@ -66,29 +66,31 @@ SECKEY="sec-zxhrt0bbwTHkRBsj8b66VL1dbQ52IFKdkfnZzdI6Qli0zPIx"
 ./light_off.sh porch
 ```
 
-播放树莓派本地音乐(需要预先下载文件到相应路径)：
+播放本地音乐（需要预先下载文件到相应路径）：
 ```bash
-media_play.sh /home/pi/media/test.mp3
+./media_play.sh /home/pi/media/test.mp3
 ```
+
 播放网络音乐：
 ```bash
-media_play.sh http://www.example.com/test.mp3
+./media_play.sh http://www.example.com/test.mp3
 ```
+
 停止播放
 ```bash
-media_stop.sh
+./media_stop.sh
 ```
 
 暂停播放与恢复播放：
 ```bash
-media_pause.sh
-media_resume.sh
+./media_pause.sh
+./media_resume.sh
 ```
 
-增加音量与减低音量：
+增加与降低音量：
 ```bash
-media_inc_vol.sh
-media_dec_vol.sh
+./media_inc_vol.sh
+./media_dec_vol.sh
 ```
 
 Web界面

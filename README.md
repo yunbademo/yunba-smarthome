@@ -47,7 +47,7 @@ APPKEY="563c4afef085fc471efdf803"
 ALIAS="pi_house"
 SECKEY="sec-zxhrt0bbwTHkRBsj8b66VL1dbQ52IFKdkfnZzdI6Qli0zPIx"
 ```
-其中**APPKEY**为你在[云巴Portal][5]所建应用的AppKey；**ALIAS**为云巴小屋的别名，**请与config.py中保持一致**；**SECKEY**为你在[云巴Portal][5]所建应用的Secret Key。然后就可以控制云巴小屋了：
+其中**APPKEY**为你在[云巴Portal][5]所建应用的AppKey；**ALIAS**为云巴小屋的别名；**请与config.py中保持一致**；**SECKEY**为你在[云巴Portal][5]所建应用的Secret Key。然后就可以控制云巴小屋了：
 
 开关门：
 ```bash
@@ -93,9 +93,19 @@ SECKEY="sec-zxhrt0bbwTHkRBsj8b66VL1dbQ52IFKdkfnZzdI6Qli0zPIx"
 ./media_dec_vol.sh
 ```
 
-Web界面
+Web UI
 --------
-...
+
+[Web UI][8]是基于[云巴JavaScript SDK][9]开发的云巴智能小屋控制界面，需要修改[web/js/main.js][10]中以下部分为你自己的参数：
+```js
+var config = {
+  APPKEY: '563c4afef085fc471efdf803',
+  TOPIC: 'smart_home_topic',
+  ALIAS: 'pi_house',
+}
+```
+
+其中**APPKEY**为你在[云巴Portal][5]所建应用的AppKey；**TOPIC**为上报消息的topic；**ALIAS**为云巴小屋的别名；**请与config.py中保持一致**。然后用浏览器打开web/html/index.html并订阅，就可以看到小屋上报的状态以及对小屋进行相关控制了。
 
 [1]: http://www.yunba.io
 [2]: https://github.com/yunbademo/yunba-smarthome/blob/master/doc/how_to_make.md
@@ -104,3 +114,6 @@ Web界面
 [5]: http://yunba.io/
 [6]: http://yunba.io/docs2/socket.io_API/
 [7]: http://yunba.io/docs2/restful_Quick_Start/
+[8]: https://github.com/yunbademo/yunba-smarthome/tree/master/web
+[9]: http://yunba.io/docs2/Javascript_SDK/
+[10]: https://github.com/yunbademo/yunba-smarthome/blob/master/web/js/main.js

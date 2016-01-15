@@ -107,7 +107,7 @@ var config = {
 
 其中**APPKEY**为你在[云巴Portal][5]所建应用的AppKey；**TOPIC**为上报消息的topic；**ALIAS**为云巴小屋的别名；**请与config.py中保持一致**。然后用浏览器打开web/html/index.html并订阅，就可以看到小屋上报的状态以及对小屋进行相关控制了。
 
-[1]: http://www.yunba.io
+[1]: http://www.tudou.com/programs/view/BYpGTDNi72E/
 [2]: https://github.com/yunbademo/yunba-smarthome/blob/master/doc/how_to_make.md
 [3]: https://github.com/yunbademo/yunba-smarthome/blob/master/doc/purchase_list.md
 [4]: https://github.com/yunbademo/yunba-smarthome/blob/master/doc/message_format.md

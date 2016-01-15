@@ -77,7 +77,7 @@ DHT22_GPIO_NUM = 22
 
 
 [1]: https://github.com/yunbademo/yunba-smarthome/blob/master/doc/purchase_list.md
-[2]: http://yunba.io
+[2]: http://www.tudou.com/programs/view/BYpGTDNi72E/
 [3]: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 [4]: https://github.com/yunbademo/yunba-smarthome/blob/master/setup_env.sh
 [5]: http://sourceforge.net/p/raspberry-gpio-python/wiki/Examples/

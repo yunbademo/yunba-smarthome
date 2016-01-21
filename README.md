@@ -105,7 +105,9 @@ var config = {
 }
 ```
 
-其中**APPKEY**为你在[云巴Portal][5]所建应用的AppKey；**TOPIC**为上报消息的topic；**ALIAS**为云巴小屋的别名；**请与config.py中保持一致**。然后用浏览器打开web/html/index.html并订阅，就可以看到小屋上报的状态以及对小屋进行相关控制了。
+其中**APPKEY**为你在[云巴Portal][5]所建应用的AppKey；**TOPIC**为上报消息的topic；**ALIAS**为云巴小屋的别名；**请与config.py中保持一致**。
+
+然后将整个web目录放在你使用的web服务器（如nginx）的可访问目录下，并解决js调用跨域问题（参考我们工程师的博客[用nginx的反向代理机制解决前端跨域问题][11]），完成后通过浏览器访问http://xxxx/web/html/index.html（xxxx表示你的域名或ip），并点击订阅按钮，就可以看到小屋上报的状态以及对小屋进行相关控制了。
 
 [1]: http://www.tudou.com/programs/view/BYpGTDNi72E/
 [2]: https://github.com/yunbademo/yunba-smarthome/blob/master/doc/how_to_make.md
@@ -117,3 +119,4 @@ var config = {
 [8]: https://github.com/yunbademo/yunba-smarthome/tree/master/web
 [9]: http://yunba.io/docs2/Javascript_SDK/
 [10]: https://github.com/yunbademo/yunba-smarthome/blob/master/web/js/main.js
+[11]: http://www.cnblogs.com/gabrielchen/p/5066120.html

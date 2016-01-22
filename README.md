@@ -27,7 +27,7 @@ TOPIC = 'smart_home_topic'
 ALIAS = 'pi_house'
 CUSTOMID = 'pi_house'
 ```
-其`APPKEY`为你在[云巴Portal][5]上所建应用的 AppKey；`TOPIC`为上报消息的 Topic，可以按自己 需求定义；`ALIAS`为云巴小屋的别名，控制消息会像这个别名发送，可以按自己需求定义；`CUSTOMID`为用户 ID，可以按自己需求定义（参考[云巴Socket.io API][6]）。
+其`APPKEY`为你在 [云巴Portal][5] 上所建应用的 AppKey；`TOPIC`为上报消息的 Topic，可以按自己 需求定义；`ALIAS`为云巴小屋的别名，控制消息会像这个别名发送，可以按自己需求定义；`CUSTOMID`为用户 ID，可以按自己需求定义（参考[云巴Socket.io API][6]）。
 
 输入以下命令就可以完成运行了：
 ```bash
